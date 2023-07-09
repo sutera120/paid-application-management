@@ -1,18 +1,23 @@
-<% for (var item of rows) { %>
-        <article class="<%= item.id %>">
-            <p>投稿<%= item.id %>回目。</p>
-        </article>
-    <p>
-        <%= item.title %>
-    </p>
+<% allPosts.forEach((allPosts)=> { %>
+    <article class="<%= allPosts.id %>">
+        <p>投稿<%= allPosts.id %>回目。</p>
+        <p>タイトル<%= allPosts.title %>
+        </p>
+        <p>
+            <%= allPosts.body %>
+        </p>
+        <a href="posts/edit/<%= allPosts.id %>">編集</a>
+        <form action="posts/delete" method="post">
+            <input type="hidden" name="id" value="<%= allPosts.id %>">
+            <input type="submit" value="削除">
+        </form>
+    </article>
+    <% }) %>
 
-    <% } %>
-
-    <form method="post" action="/posts">
-        <label>
-            Name:
-            <input name="name" autocomplete="name"  enctype="multipart/form-data" />
-        </label>
-        <button type="submit">Save</button>
-    </form>
-    <!-- <form action="/" method="POST"><input type="text" name="menu"><button type="submit">送信</button></form> -->
+        <form action="/posts" method="post">
+            <input type="text" name="title">
+            <label for="body">内容</label>
+            <textarea id="body" name="body" rows="5" cols="33"></textarea>
+            <!-- <label>年/月/日：<input type="date"></label> -->
+            <input type="submit" value="投稿する">
+        </form>

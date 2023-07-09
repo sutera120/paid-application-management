@@ -16,14 +16,15 @@ const homeRouter = require("./routes/home.js");
 const userRouter = require("./routes/user.js");
 const postsRouter = require("./routes/posts.js");
 
-
 const PORT = 3000;
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 app.set("view engine", "ejs");//server.jsで使用を宣言すれば、他のルーティングでも使える
 app.use(expressLayouts);
-app.use(express.static("css"))
+app.use(express.static("css"));
 
 //routerをset
 // app.use("/", homeRouter);

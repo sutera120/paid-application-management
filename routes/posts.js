@@ -2,39 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { PrismaClient } = require("@prisma/client")
 
-const mysql = require("mysql");
 
 const app = express();
 const prisma = new PrismaClient;
-
-
-//サーバー接続
-const pool = mysql.createPool({
-    connectionLimit: 10,
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "test",
-});
-
-
-// router.get("/", (req, res) => {
-
-//     pool.getConnection((err, connection) => {
-//         if (err) throw err;
-
-//         console.log("DB接続中");
-
-//         connection.query('SELECT * FROM posts', (err, rows) => {
-//             connection.release();
-
-//             console.log(rows);
-
-//             if (!err) {
-//                 res.render("posts", { rows });
-//             };
-//         });
-//     });
 
 // });
 
@@ -42,22 +12,63 @@ const pool = mysql.createPool({
 //     res.render("home");
 // });
 
-router.post("/", (req, res) => {
-    console.log("post");
-    console.log(req.body);
-    res.send("hello");
+// 一覧表示
+router.get("/", async (req, res) => {
+    const allPosts = await prisma.posts.findMany();
+    res.render("posts", { allPosts });
 });
-// router.post("/posts", async (req, res) => {
-//     const { title, body } = req.body;
-//     const posts = await prisma.posts.create({
-//         data: {
-//             title: title,
-//             body: body,
-//         },
-//     });
-//     return res.json(posts);
-// });
 
+// 新規作成
+router.post("/", async (req, res) => {
+    const { title, body } = req.body;
+    const posts = await prisma.posts.create({
+        data: {
+            title: title,
+            body: body,
+        },
+    });
+    res.redirect('/posts')
+});
+
+//更新処理
+router.get('/edit/:id', async (req, res) => {
+    const id = Number(req.params.id);
+    const editItem = await prisma.posts.findUnique({
+        where: {
+            id: id,
+        },
+    })
+    res.render("edit", { editItem });
+});
+
+router.post('/edit/', async (req, res) => {
+    const { id, title, body } = req.body;
+    const editItem = await prisma.posts.update({
+        /**更新レコードを指定 */
+        where: {
+            id: Number(id),
+        },
+        /**更新内容 */
+        data: {
+            title: title,
+            body: body,
+        },
+    })
+    console.log(editItem);
+    res.redirect('/posts');
+});
+
+//削除
+router.post('/delete', async (req, res) => {
+    const { id, } = req.body;
+    const editItem = await prisma.posts.delete({
+        /**更新レコードを指定 */
+        where: {
+            id: Number(id),
+        },
+    });
+    res.redirect('/posts')
+});
 
 // router.get("/:id", (req, res) => {
 //     console.log("get");
