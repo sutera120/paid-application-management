@@ -15,9 +15,9 @@
     <% }) %>
 
         <form action="/posts" method="post">
-            <input type="text" name="title">
+            <input type="text" name="title" required="required">
             <label for="body">内容</label>
-            <textarea id="body" name="body" rows="5" cols="33"></textarea>
+            <textarea id="body" name="body" required="required" rows="5" cols="33"></textarea>
             <!-- <label>年/月/日：<input type="date"></label> -->
             <input type="submit" value="投稿する">
         </form>

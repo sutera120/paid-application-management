@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { PrismaClient } = require("@prisma/client")
-
+const { PrismaClient } = require("@prisma/client");
+const session = require('express-session');
 
 const app = express();
 const prisma = new PrismaClient;
@@ -14,26 +14,27 @@ const prisma = new PrismaClient;
 
 // 一覧表示
 router.get("/", async (req, res) => {
-    const allPosts = await prisma.posts.findMany();
+    const allPosts = await prisma.post.findMany();
     res.render("posts", { allPosts });
+    console.log(session.user);
 });
 
 // 新規作成
 router.post("/", async (req, res) => {
     const { title, body } = req.body;
-    const posts = await prisma.posts.create({
+    const posts = await prisma.post.create({
         data: {
             title: title,
             body: body,
         },
     });
-    res.redirect('/posts')
+    res.redirect('/posts');
 });
 
 //更新処理
 router.get('/edit/:id', async (req, res) => {
     const id = Number(req.params.id);
-    const editItem = await prisma.posts.findUnique({
+    const editItem = await prisma.post.findUnique({
         where: {
             id: id,
         },
@@ -43,7 +44,7 @@ router.get('/edit/:id', async (req, res) => {
 
 router.post('/edit/', async (req, res) => {
     const { id, title, body } = req.body;
-    const editItem = await prisma.posts.update({
+    const editItem = await prisma.post.update({
         /**更新レコードを指定 */
         where: {
             id: Number(id),
@@ -61,13 +62,13 @@ router.post('/edit/', async (req, res) => {
 //削除
 router.post('/delete', async (req, res) => {
     const { id, } = req.body;
-    const editItem = await prisma.posts.delete({
+    const editItem = await prisma.post.delete({
         /**更新レコードを指定 */
         where: {
             id: Number(id),
         },
     });
-    res.redirect('/posts')
+    res.redirect('/posts');
 });
 
 // router.get("/:id", (req, res) => {

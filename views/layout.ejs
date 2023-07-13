@@ -8,7 +8,11 @@
 </head>
 
 <%- include('partials/header'); %>
-
+                <% var errMsg ; if(typeof errMsg !=="undefined" ) { %>
+                    <div style="color: red;">
+                        <%= errMsg %>
+                    </div>
+                    <% }%>
 <body>
     <%- body %>
 </body>
