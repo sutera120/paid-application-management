@@ -1,26 +1,30 @@
 <% allPosts.forEach((allPosts)=> { %>
-    <article class="<%= allPosts.id %>">
-        <p>投稿<%= allPosts.id %>回目。</p>
-        <div class="nes-container is-dark with-title">
-        <p class="title">タイトル<%= allPosts.title %>
-        </p>
-        <p>
-            <%= allPosts.body %>
-        </p>
-        </div>
-        <a  class="nes-btn" href="posts/edit/<%= allPosts.id %>">編集</a>
+<article class="posts" id="<%= allPosts.id %>">
+  <p>投稿<%= allPosts.id %>回目。</p>
+  <div class="wrapper flex">
+    <div class="nes-container is-dark with-title">
+      <p class="title">タイトル<%= allPosts.title %>
+      </p>
+      <p>
+        <%= allPosts.body %>
+      </p>
+    </div>
+    <div>
+        <a class="nes-btn" href="posts/edit/<%= allPosts.id %>">編集</a>
         <form action="posts/delete" method="post">
             <input type="hidden" name="id" value="<%= allPosts.id %>">
-            <input type="submit"  class="nes-btn is-error" value="削除">
+            <input type="submit" class="nes-btn is-error" value="削除">
         </form>
-    </article>
-    <% }) %>
+    </div>
+  </div>
+</article>
+<% }) %>
 
-        <form action="/posts" method="post">
-            <label for="title">タイトル</label>
-            <input type="text" name="title" required="required" class="nes-input is-dark">
-            <label for="body">内容</label>
-            <textarea id="body" name="body" required="required" rows="5" cols="33" class="nes-textarea is-dark"></textarea>
-            <!-- <label>年/月/日：<input type="date"></label> -->
-            <input type="submit" class="nes-btn" value="投稿する">
-        </form>
+<form action="/posts" method="post">
+  <label for="title">タイトル</label>
+  <input type="text" name="title" required="required" class="nes-input is-dark">
+  <label for="body">内容</label>
+  <textarea id="body" name="body" required="required" rows="5" cols="33" class="nes-textarea is-dark"></textarea>
+  <!-- <label>年/月/日：<input type="date"></label> -->
+  <input type="submit" class="nes-btn" value="投稿する">
+</form>

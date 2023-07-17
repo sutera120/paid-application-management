@@ -1,0 +1,23 @@
+<h1><%= user.name %>さんのアカウント情報</h1>
+    <div class="nes-table-responsive">
+  <table class="nes-table is-bordered is-dark">
+    <tr>
+      <th>id</th>
+      <td>
+        <%= user.id %>
+      </td>
+    </tr>
+    <tr>
+      <th>アカウント名</th>
+      <td>
+        <%= user.name %>
+      </td>
+    </tr>
+    <tr>
+      <th>email</th>
+      <td>
+        <%= user.maskedEmail %>
+      </td>
+    </tr>
+  </table>
+  </div>

@@ -1,0 +1,67 @@
+<section>
+  <!-- ユーザー情報入力 -->
+  <% if (pageType==="input" ) { %>
+  <p>アカウント新規作成</p>
+  <form action="/user/register" method="post">
+    <div class="nes-field is-inline">
+      <label for="body">アカウント名</label>
+      <input type="text" name="name" required="required" class="nes-input is-dark" value="<%= user.name %>">
+    </div>
+    <div class="nes-field is-inline">
+      <label for="body">e-mail</label>
+      <input type="email" name="email" required="required" class="nes-input is-dark" value="<%= user.email %>">
+    </div>
+    <% if (typeof errMsg==="undefined" ) { errMsg=null }; %>
+    <% if (errMsg!==null ) { %>
+    <div style="color: red;">
+      <%= errMsg %>
+    </div>
+    <% }; %>
+    <div class="nes-field is-inline">
+      <label for="body">パスワード</label>
+      <input type="password" name="password" maxlength="10" required="required" class="nes-input is-dark" value="<%= user.password %>">
+    </div>
+
+    <!-- <label>年/月/日：<input type="date"></label> -->
+    <input type="submit" class="nes-btn" value="確認">
+    <% }%>
+
+    <% if (pageType==="confirm" ){%>
+    <p>入力内容を確認してください</p>
+    <div class="nes-table-responsive">
+      <table class="nes-table is-bordered is-dark">
+        <tr>
+          <th>アカウント名</th>
+          <td>
+            <%= user.name %>
+          </td>
+        </tr>
+        <tr>
+          <th>email</th>
+          <td>
+            <%= user.maskedEmail %>
+          </td>
+        </tr>
+        <tr>
+          <th>password</th>
+          <td>
+            <%= user.password %>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <form action="/user/register" method="get">
+      <input type="hidden" name="name" required="required" value="<%= user.name %>">
+      <input type="hidden" name="email" required="required" value="<%= user.email %>">
+      <input type="hidden" name="password" maxlength="10" required="required" value="<%= user.password %>">
+      <input type="submit" class="nes-btn" value="戻る">
+    </form>
+    <form action="/user/register/success" method="post">
+      <input type="hidden" name="name" required="required" value="<%= user.name %>">
+      <input type="hidden" name="email" required="required" value="<%= user.email %>">
+      <input type="hidden" name="password" maxlength="10" required="required" value="<%= user.password %>">
+      <input type="submit" class="nes-btn is-primary" value="登録">
+    </form>
+    <% }%>
+</section>
+</form>

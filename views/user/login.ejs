@@ -1,0 +1,26 @@
+<section>
+  <!-- <p>アカウント新規作成</p> -->
+<h1>ログイン</h1>
+  <form action="/user/login" method="post">
+    <div class="nes-field is-inline">
+      <label for="body">e-mail</label>
+      <input type="email" name="email" required="required" class="nes-input is-dark">
+    </div>
+    <div class="nes-field is-inline">
+      <label for="body">パスワード</label>
+      <input type="password" name="password" maxlength="10" required="required" class="nes-input is-dark">
+    </div>
+    <% if (typeof errMsg==="undefined" ) { errMsg=null }; %>
+    <% if (errMsg!==null ) { %>
+    <div style="color: red;">
+      <%= errMsg %>
+    </div>
+    <% }; %>
+    <!-- <label>年/月/日：<input type="date"></label> -->
+    <input type="submit" class="nes-btn is-primary" value="ログイン">
+  </form>
+
+</section>
+<a href="/user/register">新規登録はこちら
+</a>
+</form>

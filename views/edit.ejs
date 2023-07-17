@@ -1,0 +1,7 @@
+    <form action="/posts/edit" method="post">
+        <input type="hidden" name="id" value="<%= editItem.id %>">
+        <input type="text" name="title" value="<%= editItem.title %>">
+                    <label for="body">内容</label>
+                    <textarea id="body" name="body" rows="5" cols="33"><%= editItem.body %></textarea>
+        <input type="submit" value="更新する">
+    </form>

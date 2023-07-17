@@ -1,0 +1,102 @@
+/* 
+** The Header Media Queries **
+** Tweak as per your needs **
+*/
+
+/* web font設定 */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p,
+ul {
+  margin: 0;
+}
+
+@font-face {
+  font-family: "misakigothic";
+  src: url("../font/misaki_gothic.ttf") format("truetype");
+}
+
+body {
+  margin: 0px;
+  background-color: #000;
+  /* font-family: 'DotGothic16', sans-serif; */
+  font-family: "Press Start 2P", "misakigothic", cursive;
+  font-size: 400;
+  color: #fff;
+  /* background-image: url(../img/bg_img_2.jpg);
+  background-position: 0 -200px; */
+}
+
+/* header */
+header {
+  margin: 10px;
+  justify-content: space-between;
+}
+
+header img {
+  width: 30px;
+  height: auto; 
+    animation: dance 1s steps(1) infinite; 
+} 
+ 
+@keyframes dance { 
+    0% { 
+        transform: scaleX(1); 
+    } 
+ 
+    50% { 
+        transform: scaleX(-1); 
+    } 
+ 
+    100% { 
+        transform: scaleX(1); 
+    } 
+}
+
+header div:first-child {
+  flex-basis: 20%;
+  align-items: center;
+}
+
+header nav {
+  flex-basis: 60%;
+}
+
+nav {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+nav p {
+  flex-basis: 30%;
+}
+
+nav ul {
+  align-items: center;
+  justify-content: flex-end;
+  flex-basis: 60%;
+}
+nav ul li:last-child {
+    margin-left: 40px;
+}
+
+.nes-table.is-dark::before{
+    position: inherit;
+}
+
+/* main */
+main{
+  padding: 10px 10%;
+}
+
+/* 投稿 */
+.posts .wrapper .nes-container{
+    flex-basis: 70%;
+}
+
+.flex {
+  display: flex;
+}

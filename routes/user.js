@@ -129,6 +129,7 @@ router.get('/info', async (req, res) => {
             },
         });
         // res.render(req.session.email)
+        user.maskedEmail = orgMod.toMasked(user.email, 3);
         res.render("user/info", { user: user });
     };
 
