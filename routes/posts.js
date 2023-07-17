@@ -16,7 +16,6 @@ const prisma = new PrismaClient;
 router.get("/", async (req, res) => {
     const allPosts = await prisma.post.findMany();
     res.render("posts", { allPosts });
-    console.log(session.user);
 });
 
 // 新規作成

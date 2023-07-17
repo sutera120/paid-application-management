@@ -1,23 +1,26 @@
 <% allPosts.forEach((allPosts)=> { %>
     <article class="<%= allPosts.id %>">
         <p>投稿<%= allPosts.id %>回目。</p>
-        <p>タイトル<%= allPosts.title %>
+        <div class="nes-container is-dark with-title">
+        <p class="title">タイトル<%= allPosts.title %>
         </p>
         <p>
             <%= allPosts.body %>
         </p>
-        <a href="posts/edit/<%= allPosts.id %>">編集</a>
+        </div>
+        <a  class="nes-btn" href="posts/edit/<%= allPosts.id %>">編集</a>
         <form action="posts/delete" method="post">
             <input type="hidden" name="id" value="<%= allPosts.id %>">
-            <input type="submit" value="削除">
+            <input type="submit"  class="nes-btn is-error" value="削除">
         </form>
     </article>
     <% }) %>
 
         <form action="/posts" method="post">
-            <input type="text" name="title" required="required">
+            <label for="title">タイトル</label>
+            <input type="text" name="title" required="required" class="nes-input is-dark">
             <label for="body">内容</label>
-            <textarea id="body" name="body" required="required" rows="5" cols="33"></textarea>
+            <textarea id="body" name="body" required="required" rows="5" cols="33" class="nes-textarea is-dark"></textarea>
             <!-- <label>年/月/日：<input type="date"></label> -->
-            <input type="submit" value="投稿する">
+            <input type="submit" class="nes-btn" value="投稿する">
         </form>

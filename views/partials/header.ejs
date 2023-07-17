@@ -1,18 +1,20 @@
 <!-- Header Start -->
-<header class="site-header">
-    <div class="wrapper site-header__wrapper">
-        <a href="/" class="brand">Home</a>
-        <nav class="nav">
-            <button class="nav__toggle" aria-expanded="false" type="button">
-                menu
-            </button>
-            <ul class="nav__wrapper">
-                <li class="nav__item"><a href="/user/login">Login</a></li>
-                <li class="nav__item"><a href="/user/logout">Logout</a></li>
-                <li class="nav__item"><a href="/user/info">アカウント情報</a></li>
-                <li class="nav__item"><a href="/posts">Posts</a></li>
-            </ul>
-        </nav>
+<header class="flex nes-container is-dark">
+    <div class="flex">
+    <img src="/img/img_2.png" alt="">
+    <a href="/">Home</a>
     </div>
+    <nav class="flex">
+      <% if (loginUserName !== null) {%>
+      <p>welcome　<%= loginUserName %>　！</p><% } %>
+      <ul class="flex">
+        <% if (loginUserName ===null) {%>
+        <li class="nav__item"><a href="/user/login">Login</a></li>
+        <% } else {%>
+        <li class="nav__item"><a href="/user/info">Status</a></li>
+        <li class="nav__item"><a href="/user/logout">Logout</a></li>
+        <% } %>
+      </ul>
+    </nav>
 </header>
 <!-- Header End -->

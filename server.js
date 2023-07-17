@@ -1,5 +1,5 @@
 /*
-使用modele
+使用module
 FW : express
 DB : mysql
 
@@ -11,8 +11,8 @@ ORM : Prisma?
 //module読み込み
 const express = require("express");
 const session = require('express-session');
+const rootPath = require('app-root-path');
 const expressLayouts = require('express-ejs-layouts');
-const bcrypt = require('bcrypt');
 
 //routerを読み込み
 const homeRouter = require("./routes/home.js");
@@ -23,7 +23,8 @@ const app = express();
 
 //各種設定・変数初期化
 const PORT = 3000;
-const setteings = require("./config/settings");
+const setteings = require(rootPath + "/config/settings");
+const orgMod = require(rootPath + "/script/original_modules");
 
 //jsonのparse設定
 app.use(express.json());
@@ -37,7 +38,14 @@ session.user = "admmin"
 //テンプレートエンジン・静的ファイルの設定
 app.set("view engine", "ejs");//server.jsで使用を宣言すれば、他のルーティングでも使える
 app.use(expressLayouts);
-app.use(express.static("css"));
+app.use(express.static("public"));
+
+//自作middleware
+app.use((req, res, next) => {
+    // ユーザーがログインしていれば、ユーザー名を取得
+    loginUserName = (typeof req.session.userName !== "undefined") ? req.session.userName : null;
+    next();
+});
 
 
 //routerをset
@@ -48,5 +56,5 @@ app.use("/", homeRouter);
 // app.get("/", (req, res) => {
 
 //     res.render("home");
-// });
+// })
 app.listen(PORT, () => console.log("サーバー起動中😸"));

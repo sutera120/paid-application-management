@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <!-- reset.css destyle -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css" />
+  <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <%- include('partials/header'); %>
-                <% var errMsg ; if(typeof errMsg !=="undefined" ) { %>
-                    <div style="color: red;">
-                        <%= errMsg %>
-                    </div>
-                    <% }%>
+
 <body>
-    <%- body %>
+  <%- body %>
 </body>
 
 <%- include('partials/footer'); %>
+
 </html>
