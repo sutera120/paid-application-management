@@ -13,7 +13,6 @@ const originalModules = {
             const maskedStr = maskStr + sliceStr;
             return maskedStr;
         },
-    a: "a",
 }
 
 module.exports = originalModules;

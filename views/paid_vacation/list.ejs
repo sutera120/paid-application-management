@@ -1,0 +1,33 @@
+<!-- <div class="wrapper flex">
+  <div class="nes-container is-dark with-title"> -->
+<article>
+  <h2><%= userName %>さんの有給取得履歴</h2>
+
+  <label for="order">並び順</label>
+  <select name="order" onchange="test(this.value)">
+    <option value="desc" <% if (orderType === "desc"){%>selected <% }; %> onchange="test">新しい順</option>
+    <option value="asc" <% if (orderType === "asc"){%>selected <% }; %> onchange="test">古い順</option>
+  </select>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>取得日</th>
+        <th>取得理由</th>
+      </tr>
+      <% lists.forEach((lists)=> { %>
+      <tr>
+        <td><%= lists.applicationDays.toLocaleDateString() %></td>
+        <td><%= lists.applicationReason %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</article>
+
+<script>
+  const test = (select) => {
+    url = "/paid-vacation/list?orderType=" + select;
+    window.location.href = url;
+  }
+</script>

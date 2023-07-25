@@ -1,16 +1,15 @@
 const express = require("express");
-const session = require('express-session');
 const rootPath = require('app-root-path');
-const router = express.Router();
 const { PrismaClient } = require("@prisma/client");
 const bcrypt = require('bcrypt');
 
-const app = express();
+const router = express.Router();
+const prisma = new PrismaClient;
 
 // const setteings = require(rootPath + "/config/settings");
 const orgMod = require(rootPath + "/script/original_modules");
-
-const prisma = new PrismaClient;
+const orgMiddleware = require(rootPath + "/middleware/middleware.js");
+const auth = orgMiddleware.auth;
 
 //アカウント新規登録
 router.get("/register", (req, res) => {
@@ -116,7 +115,7 @@ router.get('/logout', (req, res) => {
 });
 
 //アカウント情報表示
-router.get('/info', async (req, res) => {
+router.get('/info',auth, async (req, res) => {
     if (req.session.userId === undefined) {
         res.send("ログインしないと見れないよ");
     }

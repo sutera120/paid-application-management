@@ -1,10 +1,9 @@
 /*
 使用module
 FW : express
-DB : mysql
 
-ORM : Prisma?
-認証 : Passport or JWT
+ORM : Prisma
+
 セッション : express-session
 
 */
@@ -17,6 +16,7 @@ const expressLayouts = require('express-ejs-layouts');
 //routerを読み込み
 const homeRouter = require("./routes/home.js");
 const userRouter = require("./routes/user.js");
+const paidVacationRouter = require("./routes/paid_vacation.js");
 const postsRouter = require("./routes/posts.js");
 
 const app = express();
@@ -25,6 +25,7 @@ const app = express();
 const PORT = 3000;
 const setteings = require(rootPath + "/config/settings");
 const orgMod = require(rootPath + "/script/original_modules");
+const orgMiddleware = require(rootPath + "/middleware/middleware.js");
 
 //jsonのparse設定
 app.use(express.json());
@@ -41,15 +42,11 @@ app.use(expressLayouts);
 app.use(express.static("public"));
 
 //自作middleware
-app.use((req, res, next) => {
-    // ユーザーがログインしていれば、ユーザー名を取得
-    loginUserName = (typeof req.session.userName !== "undefined") ? req.session.userName : null;
-    next();
-});
-
+app.use(orgMiddleware.getLoginUserName);
 
 //routerをset
 app.use("/user", userRouter);
+app.use("/paid-vacation", paidVacationRouter);
 app.use("/posts", postsRouter);
 app.use("/", homeRouter);
 

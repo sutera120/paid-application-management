@@ -1,9 +1,7 @@
 const express = require("express");
-const router = express.Router();
 const { PrismaClient } = require("@prisma/client");
-const session = require('express-session');
 
-const app = express();
+const router = express.Router();
 const prisma = new PrismaClient;
 
 // });
@@ -21,6 +19,7 @@ router.get("/", async (req, res) => {
 // 新規作成
 router.post("/", async (req, res) => {
     const { title, body } = req.body;
+    
     const posts = await prisma.post.create({
         data: {
             title: title,

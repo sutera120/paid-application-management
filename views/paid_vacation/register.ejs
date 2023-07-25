@@ -1,0 +1,27 @@
+<section>
+  <!-- ユーザー情報入力 -->
+  <h1>有給申請</h1>
+  <form action="/paid-vacation/register" method="post">
+    <div class="nes-field is-inline"">
+      <label for=" applicationDays">取得希望日</label>
+      <input type="date" name="applicationDays" required="required" class="is-dark" value="">
+    </div>
+    <div class="nes-field is-inline">
+      <label for="reason">取得理由</label>
+      <input type="text" name="reason" class="nes-input is-dark" value="">
+    </div>
+
+    <button type="button" onclick="document.getElementById('dialog').show();">
+      確認
+    </button>
+
+    <dialog id="dialog">
+      <p>申請します。よろしいですか？</p>
+      <input type="submit" class="nes-btn is-primary" value="送信">
+      <button type="button" class="nes-btn" onclick="document.getElementById('dialog').close();">
+        キャンセル
+      </button>
+    </dialog>
+
+  </form>
+</section>

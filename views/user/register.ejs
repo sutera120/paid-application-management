@@ -4,11 +4,11 @@
   <p>アカウント新規作成</p>
   <form action="/user/register" method="post">
     <div class="nes-field is-inline">
-      <label for="body">アカウント名</label>
+      <label for="name">アカウント名</label>
       <input type="text" name="name" required="required" class="nes-input is-dark" value="<%= user.name %>">
     </div>
     <div class="nes-field is-inline">
-      <label for="body">e-mail</label>
+      <label for="email">e-mail</label>
       <input type="email" name="email" required="required" class="nes-input is-dark" value="<%= user.email %>">
     </div>
     <% if (typeof errMsg==="undefined" ) { errMsg=null }; %>
@@ -18,7 +18,7 @@
     </div>
     <% }; %>
     <div class="nes-field is-inline">
-      <label for="body">パスワード</label>
+      <label for="password">パスワード</label>
       <input type="password" name="password" maxlength="10" required="required" class="nes-input is-dark" value="<%= user.password %>">
     </div>
 

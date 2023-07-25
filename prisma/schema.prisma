@@ -10,15 +10,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id Int @default(autoincrement()) @id
-  name String
-  email String @unique
-  password String
+model User {
+  id           Int            @id @default(autoincrement())
+  name         String
+  email        String         @unique
+  password     String
+  paidVacation PaidVacation[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
 }
 
-model Post{
-  id Int @default(autoincrement()) @id
+model Post {
+  id    Int    @id @default(autoincrement())
   title String
-  body String
+  body  String
+}
+
+model PaidVacation {
+  id                Int     @id @default(autoincrement())
+  applicationDays   DateTime
+  applicant         User    @relation(fields: [applicantId], references: [id])
+  applicantId       Int
+  applicationReason String?
 }

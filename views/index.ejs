@@ -1,2 +1,5 @@
 ホーム画面
-<a href="/posts">Posts</a>
+<% if (loginUserName !==null) {%>
+    <a href="/paid-vacation">有給申請</a>
+    <a href="/posts">Posts</a>
+    <% } %>

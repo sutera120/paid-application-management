@@ -97,6 +97,22 @@ main{
     flex-basis: 70%;
 }
 
+
+  table , td, th {
+	border: 1px solid #595959;
+	border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+	padding: 3px;
+  width:calc(100%/4);
+  /* width: 50%; */
+}
+th {
+  background-color: #fff;
+  color: #000;
+}
+
 .flex {
   display: flex;
 }
