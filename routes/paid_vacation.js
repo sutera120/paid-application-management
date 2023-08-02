@@ -44,11 +44,43 @@ router.post("/register", async (req, res) => {
 router.get("/list", auth, async (req, res) => {
   id = req.session.userId;
   orderType = req.query.orderType === "asc" ? "asc" : "desc";
-  console.log(orderType);
   userName = req.session.userName;
+
+
+  // 申請中一覧
+  const rejectedLists = await prisma.paidVacation.findMany({
+    where: {
+      applicantId: id,
+      applicationStatus: "REJECTED",
+    },
+    select: {
+      applicationDays: true,
+      applicationReason: true,
+    },
+    orderBy: {
+      applicationDays: "desc",
+    },
+  });
+  // 申請中一覧
+  const pendingLists = await prisma.paidVacation.findMany({
+    where: {
+      applicantId: id,
+      applicationStatus: "PENDING",
+    },
+    select: {
+      applicationDays: true,
+      applicationReason: true,
+    },
+    orderBy: {
+      applicationDays: "desc",
+    },
+  });
+
+  // 申請済み一覧
   const allLists = await prisma.paidVacation.findMany({
     where: {
       applicantId: id,
+      applicationStatus: "PERMISSION",
     },
     select: {
       applicationDays: true,
@@ -58,22 +90,67 @@ router.get("/list", auth, async (req, res) => {
       applicationDays: orderType,
     },
   });
-  res.render("paid_vacation/list", { lists: allLists, userName: userName, orderType: orderType });
+
+  res.render("paid_vacation/list", {
+    rejectedLists: rejectedLists,
+    lists: allLists,
+    pendingLists: pendingLists,
+    userName: userName,
+    orderType: orderType,
+  });
 });
 
+// --管理者メニュー--
+//取得処理(管理者)
+router.get("/pending_paid_vacation", auth, async (req, res) => {
+
+  const pendingLists = await prisma.paidVacation.findMany({
+    where: {
+      applicationStatus: "PENDING",
+      applicant: {
+        role: {
+          not: "ADMIN",
+        },
+      },
+    },
+    select: {
+      id: true,
+      applicationDays: true,
+      applicationReason: true,
+      applicant: {
+        select: { name: true },
+      },
+    },
+    orderBy: {
+      applicant: { name: "desc" },
+    },
+  });
+
+  res.render("paid_vacation/pending_paid_vacation", {
+    pendingLists: pendingLists,
+  });
+});
+
+router.post("/pending_paid_vacation", auth, async (req, res) => {
+  const { id, changedStatus } = req.body;
+  const editVacation = await prisma.paidVacation.update({
+        /**更新レコードを指定 */
+        where: {
+            id: Number(id),
+        },
+        /**更新内容 */
+        data: {
+          applicationStatus: changedStatus,
+        },
+    })
+const url = "/"
+  res.render("common/finished_process", {
+    url: url,
+  });
+});
 // router.post('/edit/', async (req, res) => {
 //     const { id, title, body } = req.body;
-//     const editItem = await prisma.post.update({
-//         /**更新レコードを指定 */
-//         where: {
-//             id: Number(id),
-//         },
-//         /**更新内容 */
-//         data: {
-//             title: title,
-//             body: body,
-//         },
-//     })
+
 //     console.log(editItem);
 //     res.redirect('/posts');
 // });

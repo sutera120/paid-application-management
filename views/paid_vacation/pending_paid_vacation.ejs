@@ -1,0 +1,28 @@
+<!-- <div class="wrapper flex">
+  <div class="nes-container is-dark with-title"> -->
+<article>
+  <h2>申請中の有給休暇一覧</h2>
+  <table>
+    <tbody>
+      <tr>
+        <th>申請者</th>
+        <th>休暇日</th>
+        <th>取得理由</th>
+      </tr>
+      <% pendingLists.forEach((pendingLists)=> { %>
+      <tr>
+        <td><%= pendingLists.applicant.name %></td>
+        <td><%= pendingLists.applicationDays.toLocaleDateString() %></td>
+        <td><%= pendingLists.applicationReason %></td>
+        <td>
+          <form action="/paid-vacation/pending_paid_vacation" method="post">
+            <input type="hidden" name="id" value="<%= pendingLists.id %>" />
+            <button type="submit" name="changedStatus" class="nes-btn is-primary" value="PERMISSION">許可</button>
+            <button type="submit" name="changedStatus" class="nes-btn"  value="REJECTED">否認</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</article>

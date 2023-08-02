@@ -1,5 +1,9 @@
-ホーム画面
+<h1>ホーム画面</h1>
 <% if (loginUserName !==null) {%>
-    <a href="/paid-vacation">有給申請</a>
-    <a href="/posts">Posts</a>
-    <% } %>
+<a href="/paid-vacation" class="nes-badge">
+  <span class="is-success">有給申請</span>
+</a>
+<a href="/posts" class="nes-badge">
+  <span class="is-success">Posts</span>
+</a>
+<% } %>

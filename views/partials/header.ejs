@@ -1,20 +1,25 @@
 <!-- Header Start -->
 <header class="flex nes-container is-dark">
-    <div class="flex">
-    <img src="/img/img_2.png" alt="">
+  <div class="flex">
     <a href="/">Home</a>
+    <img src="/img/img_<%= loginUserRole %>.png" class="<%= loginUserRole %>" alt="">
+    <% if (isAdmin) {%>
+    <div class="nes-balloon from-left is-dark">
+      <p>ひれ伏せ　人間ども!!</p>
     </div>
-    <nav class="flex">
-      <% if (loginUserName !== null) {%>
-      <p>welcome　<%= loginUserName %>　！</p><% } %>
-      <ul class="flex">
-        <% if (loginUserName ===null) {%>
-        <li class="nav__item"><a href="/user/login">Login</a></li>
-        <% } else {%>
-        <li class="nav__item"><a href="/user/info">Status</a></li>
-        <li class="nav__item"><a href="/user/logout">Logout</a></li>
-        <% } %>
-      </ul>
-    </nav>
+    <% } %>
+  </div>
+  <nav class="flex">
+    <% if (loginUserName !== null) {%>
+    <p>welcome　<%= loginUserName %>　！</p><% } %>
+    <ul class="flex">
+      <% if (loginUserName ===null) {%>
+      <li class="nav__item"><a href="/user/login">Login</a></li>
+      <% } else {%>
+      <li class="nav__item"><a href="/user/info">Status</a></li>
+      <li class="nav__item"><a href="/user/logout">Logout</a></li>
+      <% } %>
+    </ul>
+  </nav>
 </header>
 <!-- Header End -->

@@ -4,11 +4,11 @@ const originalModules = {
     第2引数:Int 伏字にする文字数
     */
     toMasked:
-        (str, int = 1) => {
+        (str, int = 0) => {
             const convStr = str.toString();
             // const int = Number(int);
-            const maskedLength = (int >= convStr.length) ? 1 : convStr.length - int;
-            const sliceStr = str.slice(- int);
+            const maskedLength = (int >= convStr.length) ? convStr : convStr.length - int;
+            const sliceStr = convStr.slice(- int);
             const maskStr = "*".repeat(maskedLength);
             const maskedStr = maskStr + sliceStr;
             return maskedStr;

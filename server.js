@@ -3,9 +3,9 @@
 FW : express
 
 ORM : Prisma
-
 セッション : express-session
 
+テンプレートエンジン : ejs
 */
 //module読み込み
 const express = require("express");
@@ -42,7 +42,8 @@ app.use(expressLayouts);
 app.use(express.static("public"));
 
 //自作middleware
-app.use(orgMiddleware.getLoginUserName);
+app.use(orgMiddleware.getLoginUserInfo);
+app.use(orgMiddleware.checkRole);
 
 //routerをset
 app.use("/user", userRouter);

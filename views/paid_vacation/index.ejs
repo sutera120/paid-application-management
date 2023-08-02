@@ -1,4 +1,17 @@
-ホーム画面
-<a href="/paid-vacation/register">有給休暇申請</a>
-<a href="/paid-vacation/list">有給取得履歴</a>
-
+<h1>有給申請メニュー</h1>
+<article>
+  <a href="/paid-vacation/register" class="nes-badge">
+    <span class="is-success">有給休暇申請</span>
+  </a>
+  <a href="/paid-vacation/list" class="nes-badge">
+    <span class="is-success">有給取得履歴</span>
+  </a>
+</article>
+<% if (isAdmin) {%>
+<h1>管理者メニュー</h1>
+<article>
+  <a href="/paid-vacation/pending_paid_vacation" class="nes-badge">
+    <span class="is-success">申請中有給一覧</span>
+  </a>
+</article>
+<% } %>

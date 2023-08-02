@@ -4,6 +4,7 @@ CREATE TABLE `User` (
     `name` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
+    `role` ENUM('USER', 'ADMIN') NOT NULL DEFAULT 'USER',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
@@ -26,6 +27,7 @@ CREATE TABLE `PaidVacation` (
     `applicationDays` DATETIME(3) NOT NULL,
     `applicantId` INTEGER NOT NULL,
     `applicationReason` VARCHAR(191) NULL,
+    `applicationStatus` ENUM('PENDING', 'PERMISSION', 'REJECTED') NOT NULL DEFAULT 'PENDING',
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

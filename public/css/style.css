@@ -39,10 +39,13 @@ header {
 header img {
   width: 30px;
   height: auto; 
-    animation: dance 1s steps(1) infinite; 
 } 
+
+.USER{
+  animation: walk 1s steps(1) infinite; 
+}
  
-@keyframes dance { 
+@keyframes walk { 
     0% { 
         transform: scaleX(1); 
     } 
@@ -54,6 +57,21 @@ header img {
     100% { 
         transform: scaleX(1); 
     } 
+}
+.ADMIN {
+  animation: fuwafuwa 2s infinite;
+}
+
+@keyframes fuwafuwa {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 header div:first-child {
@@ -111,6 +129,15 @@ td, th {
 th {
   background-color: #fff;
   color: #000;
+}
+
+.nes-container{
+  padding: 1rem 1.5rem;
+}
+
+.nes-balloon{
+  padding: 0;
+  font-size: 5px;
 }
 
 .flex {

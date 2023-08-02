@@ -10,11 +10,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "../ERD.png"
+  theme    = "dark"
+}
+
 model User {
   id           Int            @id @default(autoincrement())
   name         String
   email        String         @unique
   password     String
+  role         Role           @default(USER)
   paidVacation PaidVacation[]
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
@@ -27,9 +34,21 @@ model Post {
 }
 
 model PaidVacation {
-  id                Int     @id @default(autoincrement())
+  id                Int               @id @default(autoincrement())
   applicationDays   DateTime
-  applicant         User    @relation(fields: [applicantId], references: [id])
+  applicant         User              @relation(fields: [applicantId], references: [id])
   applicantId       Int
   applicationReason String?
+  applicationStatus ApplicationStatus @default(PENDING)
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum ApplicationStatus {
+  PENDING
+  PERMISSION
+  REJECTED
 }

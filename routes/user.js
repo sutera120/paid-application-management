@@ -65,6 +65,7 @@ router.post("/register/success", async (req, res) => {
     // sessionにログインユーザー情報追加
     req.session.userId = user.id;
     req.session.userName = user.name;
+    req.session.userRole = user.role;
     console.log("新規登録成功");
     res.redirect("/user/info")
 });
@@ -99,6 +100,8 @@ router.post("/login", async (req, res) => {
             // sessionにログインユーザー情報追加
             req.session.userId = user.id;
             req.session.userName = user.name;
+            req.session.userRole = user.role;
+
             res.redirect("/");
         } else {
             const errMsg = "emailまたはパスワードが間違っています";
@@ -128,7 +131,7 @@ router.get('/info',auth, async (req, res) => {
             },
         });
         // res.render(req.session.email)
-        user.maskedEmail = orgMod.toMasked(user.email, 3);
+        user.maskedEmail = orgMod.toMasked(user.email, 1);
         res.render("user/info", { user: user });
     };
 

@@ -1,32 +1,79 @@
 <!-- <div class="wrapper flex">
   <div class="nes-container is-dark with-title"> -->
 <article>
-  <h2><%= userName %>さんの有給取得履歴</h2>
+  <h2>
+    <%= userName %>さんの有給取得履歴
+  </h2>
+  <section>
+    <p>否認された申請</p>
+    <p style="color: red;">この申請は否認されました。<br>再申請、または申請の取り下げをしてください</p>
+    <table>
+      <tbody>
+        <tr>
+          <th>休暇日</th>
+          <th>取得理由</th>
+        </tr>
+        <% rejectedLists.forEach((rejectedLists)=> { %>
+        <tr>
+          <td>
+            <%= rejectedLists.applicationDays.toLocaleDateString() %>
+          </td>
+          <td>
+            <%= rejectedLists.applicationReason %>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </section>
+  <section>
+    <p>申請中の有給休暇一覧</p>
+    <table>
+      <tbody>
+        <tr>
+          <th>休暇日</th>
+          <th>取得理由</th>
+        </tr>
+        <% pendingLists.forEach((pendingLists)=> { %>
+        <tr>
+          <td>
+            <%= pendingLists.applicationDays.toLocaleDateString() %>
+          </td>
+          <td>
+            <%= pendingLists.applicationReason %>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </section>
+  <section>
+    <p>取得済みの有給休暇一覧</p>
+    <label for="order">並び順</label>
+    <select name="order" onchange="sort(this.value)">
+      <option value="desc" <% if (orderType === "desc"){%>selected <% }; %> onchange="test">新しい順</option>
+      <option value="asc" <% if (orderType === "asc"){%>selected <% }; %> onchange="test">古い順</option>
+    </select>
 
-  <label for="order">並び順</label>
-  <select name="order" onchange="test(this.value)">
-    <option value="desc" <% if (orderType === "desc"){%>selected <% }; %> onchange="test">新しい順</option>
-    <option value="asc" <% if (orderType === "asc"){%>selected <% }; %> onchange="test">古い順</option>
-  </select>
-
-  <table>
-    <tbody>
-      <tr>
-        <th>取得日</th>
-        <th>取得理由</th>
-      </tr>
-      <% lists.forEach((lists)=> { %>
-      <tr>
-        <td><%= lists.applicationDays.toLocaleDateString() %></td>
-        <td><%= lists.applicationReason %></td>
-      </tr>
-      <% }) %>
-    </tbody>
-  </table>
+    <table>
+      <tbody>
+        <tr>
+          <th>休暇日</th>
+          <th>取得理由</th>
+        </tr>
+        <% lists.forEach((lists)=> { %>
+        <tr>
+          <td><%= lists.applicationDays.toLocaleDateString() %></td>
+          <td><%= lists.applicationReason %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </section>
 </article>
 
 <script>
-  const test = (select) => {
+  const sort = (select) => {
     url = "/paid-vacation/list?orderType=" + select;
     window.location.href = url;
   }

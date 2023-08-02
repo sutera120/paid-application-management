@@ -7,7 +7,8 @@
     "dev": "nodemon server.js",
     "dbInit": "npx prisma migrate dev --name init",
     "dbReset": "npx prisma migrate reset",
-    "ps": "npx prisma studio"
+    "ps": "npx prisma studio",
+    "er": "npx prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -22,8 +23,11 @@
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.3",
     "express-validator": "^7.0.1",
-    "mysql": "^2.18.1",
     "nodemon": "^2.0.22",
     "prisma": "^4.16.2"
+  },
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^10.2.4",
+    "prisma-erd-generator": "^1.8.0"
   }
 }
