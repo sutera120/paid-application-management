@@ -8,7 +8,7 @@ const prisma = new PrismaClient;
 
 // const setteings = require(rootPath + "/config/settings");
 const orgMod = require(rootPath + "/script/original_modules");
-const orgMiddleware = require(rootPath + "/middleware/middleware.js");
+const orgMiddleware = require(rootPath + "/middleware/middleware");
 const auth = orgMiddleware.auth;
 
 //アカウント新規登録
@@ -120,7 +120,7 @@ router.get('/logout', (req, res) => {
 //アカウント情報表示
 router.get('/info',auth, async (req, res) => {
     if (req.session.userId === undefined) {
-        res.send("ログインしないと見れないよ");
+        res.send("ログイン時のみ表示");
     }
     //sessionが存在する場合は表示
     else {

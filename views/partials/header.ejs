@@ -5,21 +5,38 @@
     <img src="/img/img_<%= loginUserRole %>.png" class="<%= loginUserRole %>" alt="">
     <% if (isAdmin) {%>
     <div class="nes-balloon from-left is-dark">
-      <p>ひれ伏せ　人間ども!!</p>
+      <p>Admin Mode</p>
     </div>
     <% } %>
   </div>
   <nav class="flex">
-    <% if (loginUserName !== null) {%>
-    <p>welcome　<%= loginUserName %>　！</p><% } %>
-    <ul class="flex">
-      <% if (loginUserName ===null) {%>
-      <li class="nav__item"><a href="/user/login">Login</a></li>
-      <% } else {%>
-      <li class="nav__item"><a href="/user/info">Status</a></li>
-      <li class="nav__item"><a href="/user/logout">Logout</a></li>
-      <% } %>
-    </ul>
+    <% if (loginUserName ===null) {%>
+    <p class=""><a href="/user/login">Login</a></p>
+    <% } else {%>
+      <div id="user_menu" class="flex">
+        <div class="inner" id="user_menu_inner">
+          <ul class="nes-container is-dark">
+            <li class=""><a href="/user/info">Status</a></li>
+            <li class=""><a href="/user/logout">Logout</a></li>
+          </ul>
+        </div>
+        <p id="user_btn" class="flex"><%= loginUserName %>　▼</p>
+    </div>
+    <% } %>
   </nav>
 </header>
 <!-- Header End -->
+<script>
+  document.getElementById('user_btn').addEventListener('click', () => {
+    // 親要素のトグルを操作
+    document.getElementById('user_menu_inner').style.display = "block";
+  });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#user_menu_inner') && !e.target.closest('#user_btn')) {
+      console.log("外側をクリックしました。");
+      document.getElementById('user_menu_inner').style.display = "none";
+    } else {
+      console.log("内側をクリックしました。")
+    }
+  })
+</script>

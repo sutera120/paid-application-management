@@ -6,13 +6,16 @@
   </h2>
   <section>
     <p>否認された申請</p>
-    <p style="color: red;">この申請は否認されました。<br>再申請、または申請の取り下げをしてください</p>
-    <table>
-      <tbody>
-        <tr>
-          <th>休暇日</th>
-          <th>取得理由</th>
-        </tr>
+        <% if (rejectedLists!==null) {%>
+          <p style="color: red;">この申請は否認されました。<br>再申請、または申請の取り下げをしてください</p>
+                    <% }%>
+          <table>
+            <tbody>
+              <tr>
+                <th>休暇日</th>
+                <th>取得理由</th>
+                </tr>
+
         <% rejectedLists.forEach((rejectedLists)=> { %>
         <tr>
           <td>

@@ -38,25 +38,25 @@ header {
 
 header img {
   width: 30px;
-  height: auto; 
-} 
-
-.USER{
-  animation: walk 1s steps(1) infinite; 
+  height: auto;
 }
- 
-@keyframes walk { 
-    0% { 
-        transform: scaleX(1); 
-    } 
- 
-    50% { 
-        transform: scaleX(-1); 
-    } 
- 
-    100% { 
-        transform: scaleX(1); 
-    } 
+
+.USER {
+  animation: walk 1s steps(1) infinite;
+}
+
+@keyframes walk {
+  0% {
+    transform: scaleX(1);
+  }
+
+  50% {
+    transform: scaleX(-1);
+  }
+
+  100% {
+    transform: scaleX(1);
+  }
 }
 .ADMIN {
   animation: fuwafuwa 2s infinite;
@@ -75,55 +75,65 @@ header img {
 }
 
 header div:first-child {
-  flex-basis: 20%;
   align-items: center;
 }
 
 header nav {
-  flex-basis: 60%;
-}
-
-nav {
-  justify-content: flex-end;
   align-items: center;
 }
 
-nav p {
-  flex-basis: 30%;
+#user_menu .inner {
+  height: 0;
+  position: absolute;
+  right: 0;
+  top: 60px;
+  display: none;
 }
 
-nav ul {
+#user_btn {
+  padding: 5px;
+  border-radius: 5px;
   align-items: center;
-  justify-content: flex-end;
-  flex-basis: 60%;
-}
-nav ul li:last-child {
-    margin-left: 40px;
 }
 
-.nes-table.is-dark::before{
-    position: inherit;
+#user_btn:hover {
+  opacity: 0.5;
+  background-color: teal;
+}
+
+#user_btn img {
+  margin-right: 20px;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 25%;
+}
+
+.nes-table.is-dark::before {
+  position: inherit;
 }
 
 /* main */
-main{
+main {
   padding: 10px 10%;
 }
 
 /* 投稿 */
-.posts .wrapper .nes-container{
-    flex-basis: 70%;
+.posts .wrapper .nes-container {
+  flex-basis: 70%;
 }
 
-
-  table , td, th {
-	border: 1px solid #595959;
-	border-collapse: collapse;
+table,
+td,
+th {
+  border: 1px solid #595959;
+  border-collapse: collapse;
   width: 100%;
 }
-td, th {
-	padding: 3px;
-  width:calc(100%/4);
+td,
+th {
+  padding: 3px;
+  width: calc(100% / 4);
   /* width: 50%; */
 }
 th {
@@ -131,11 +141,11 @@ th {
   color: #000;
 }
 
-.nes-container{
+.nes-container {
   padding: 1rem 1.5rem;
 }
 
-.nes-balloon{
+.nes-balloon {
   padding: 0;
   font-size: 5px;
 }
